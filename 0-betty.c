@@ -2,15 +2,19 @@
 #include <unistd.h>
 
 /**
- * main - PID
+ * main - execve example
  *
  * Return: Always 0.
  */
 int main(void)
 {
-	pid_t my_pid;
+    char *argv[] = {"/bin/ls", "-l", "/usr/", NULL};
 
-	my_pid = getpid();
-	printf("%u\n", my_pid);
-	return (0);
+    printf("Before execve\n");
+    if (execve(argv[0], argv, NULL) == -1)
+    {
+        perror("Error:");
+    }
+    printf("After execve\n");
+    return (0);
 }
